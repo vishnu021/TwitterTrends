@@ -1,0 +1,33 @@
+application:
+  title: Twitter Trends
+  version: 1.0.0
+
+twitter-tokens:
+  consumerKey:
+  consumerSecret:
+  token:
+  secret:
+
+twitter:
+  search-terms: kafka, java, springboot
+  queue-size: 1000
+
+kafka:
+  bootstrap.server: 127.0.0.1:9092
+  topic: filtered_tweets
+
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    org.apache.kafka: INFO
+    com.vish.tweet.reader: DEBUG
+  file:
+    path: reader
+    name: log/reader.log
+    max-size: 5MB
+  pattern:
+    rolling-file-name: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
+    file: "%d{yyyy-MM-dd HH:mm:ssZ} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n"
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSSZ}){faint} %clr(${LOG_LEVEL_PATTERN:%5p})\
+              {magenta} %clr(-){faint}%clr([%5.5t]){faint}%clr(%-30.30logger{30}){cyan} %clr(:){faint} %m%n"
