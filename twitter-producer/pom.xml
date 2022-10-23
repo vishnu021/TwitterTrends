@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>com.vish.tweet.reader</groupId>
-            <artifactId>kafka</artifactId>
+            <artifactId>sink</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

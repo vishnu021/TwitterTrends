@@ -19,6 +19,7 @@
     <modules>
         <module>sink</module>
         <module>twitter-producer</module>
+        <module>reader</module>
     </modules>
 
     <properties>

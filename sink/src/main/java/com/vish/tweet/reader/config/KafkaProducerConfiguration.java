@@ -13,7 +13,7 @@ import java.util.Properties;
 
 @Slf4j
 @Configuration
-public class KafkaConfiguration {
+public class KafkaProducerConfiguration {
     @Bean
     public Sink createKafkaSink(KafkaProducer<String, String> producer, @Value("${kafka.topic}") String topic) {
         return new Sink(producer, topic);
