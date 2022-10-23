@@ -31,3 +31,23 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ssZ} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n"
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSSZ}){faint} %clr(${LOG_LEVEL_PATTERN:%5p})\
               {magenta} %clr(-){faint}%clr([%5.5t]){faint}%clr(%-30.30logger{30}){cyan} %clr(:){faint} %m%n"
+
+# configs for actuator endpoints
+management:
+  server.port: 8080
+  endpoint:
+    info.cache.time-to-live: 5s
+    health:
+      show-details: always
+      cache.time-to-live: 5s
+    metrics.enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web.exposure.include: "*"
+    base-path: /actuator
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 30s

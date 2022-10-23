@@ -1,9 +1,8 @@
-package com.vish.tweet.reader.trends.model;
+package com.vish.tweet.reader.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
@@ -19,51 +18,30 @@ public class Tweet {
     @JsonProperty(value = "created_at")
     private String at;
     private long id;
-    @ToString.Exclude
     private String id_str;
     private String text;
-    @ToString.Exclude
     private String source;
-    @ToString.Exclude
     private boolean truncated;
-    @ToString.Exclude
     private Object in_reply_to_status_id;
-    @ToString.Exclude
     private Object in_reply_to_status_id_str;
-    @ToString.Exclude
     private Object in_reply_to_user_id_str;
-    @ToString.Exclude
     private Object in_reply_to_screen_name;
     private User user;
-    @ToString.Exclude
     private Object geo;
-    @ToString.Exclude
     private Object coordinates;
-    @ToString.Exclude
     private Object place;
-    @ToString.Exclude
     private Object contributors;
     private Tweet retweeted_status;
-    @ToString.Exclude
     private boolean is_quote_status;
-    @ToString.Exclude
     private long quote_count;
-    @ToString.Exclude
     private long reply_count;
-    @ToString.Exclude
     private long retweet_count;
-    @ToString.Exclude
     private long favorite_count;
-    @ToString.Exclude
     private Map<Object, Object> entities;
-    @ToString.Exclude
     private boolean favorited;
-    @ToString.Exclude
     private boolean retweeted;
-    @ToString.Exclude
     private String filter_level;
     private String lang;
-    @ToString.Exclude
     private long timestamp_ms;
 
 

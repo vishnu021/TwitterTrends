@@ -1,4 +1,4 @@
-package com.vish.tweet.reader.trends.config;
+package com.vish.tweet.reader.config;
 
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
@@ -9,8 +9,8 @@ import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
 import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
-import com.vish.tweet.reader.trends.KafkaSink;
-import com.vish.tweet.reader.trends.TwitterClient;
+import com.vish.tweet.reader.Sink;
+import com.vish.tweet.reader.TwitterClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(TwitterProperties.class)
+@EnableConfigurationProperties(TwitterTokenProperties.class)
 public class TwitterConfiguration {
 
     @Autowired
-    private TwitterProperties twitterProperties;
+    private TwitterTokenProperties twitterProperties;
 
     @Bean
     public Hosts hoseBirdHosts() {
@@ -78,7 +78,7 @@ public class TwitterConfiguration {
     }
 
     @Bean
-    public TwitterClient twitterProducer(Client twitterClient, KafkaSink processor) {
-        return new TwitterClient(twitterClient, processor);
+    public TwitterClient twitterProducer(Client twitterClient, Sink processor, BlockingQueue<String> blockingQueue) {
+        return new TwitterClient(twitterClient, processor, blockingQueue);
     }
 }

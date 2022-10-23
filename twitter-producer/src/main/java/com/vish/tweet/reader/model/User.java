@@ -1,4 +1,4 @@
-package com.vish.tweet.reader.trends.model;
+package com.vish.tweet.reader.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
