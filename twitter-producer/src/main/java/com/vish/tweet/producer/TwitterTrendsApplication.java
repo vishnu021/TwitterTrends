@@ -1,9 +1,9 @@
-package com.vish.tweet.reader;
+package com.vish.tweet.producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"com.vish.tweet.reader"})
+@SpringBootApplication(scanBasePackages = {"com.vish.tweet"})
 public class TwitterTrendsApplication {
 
     public static void main(String[] args) {

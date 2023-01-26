@@ -5,5 +5,6 @@
 mvn clean install
 
 
-### Running :   
-mvn spring-boot:run -pl twitter-producer
+### Running in docker :
+docker build -t twitter-trends twitter-producer
+docker-compose up -d

@@ -21,10 +21,10 @@ logging:
     root: ERROR
     org.springframework.web: ERROR
     org.apache.kafka: INFO
-    com.vish.tweet.reader: DEBUG
+    com.vish.tweet: DEBUG
   file:
-    path: reader
-    name: log/reader.log
+    path: producer
+    name: log/producer.log
     max-size: 5MB
   pattern:
     rolling-file-name: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
