@@ -1,12 +1,21 @@
-version: '3'
+version: '3.2'
 
 services:
   twitter-trends:
     image: twitter-trends:latest
     hostname: twitter-trends
     container_name: twitter-trends
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
     ports:
       - "8080:8080"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      kafka.bootstrap.server: PLAINTEXT://kafka1:19092
+      kafka.schema.registry.url: "http://schema-registry1:8081/"
     depends_on:
       - zoo1
       - kafka1
@@ -19,8 +28,6 @@ services:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_SERVERS: zoo1:2888:3888
 
   kafka1:
     image: confluentinc/cp-kafka:7.3.0
@@ -40,9 +47,30 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_JMX_PORT: 9999
-      KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
+
+  schema-registry1:
+    image: confluentinc/cp-schema-registry:7.3.0
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka1:19092"
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"
+      SCHEMA_REGISTRY_HOST_NAME: "schema-registry1"
+      SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR: "1"
+    depends_on:
+      - kafka1
+
+  schema-registry-ui1:
+    image: landoop/schema-registry-ui:0.9.5
+    ports:
+      - "8086:8086"
+    environment:
+      PORT: "8086"
+      PROXY: "true"
+      SCHEMAREGISTRY_URL: "http://schema-registry1:8081/"
+    depends_on:
+      - schema-registry1

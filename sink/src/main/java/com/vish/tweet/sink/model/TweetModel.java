@@ -13,7 +13,7 @@ import java.util.TimeZone;
 @Data
 @Slf4j
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Tweet {
+public class TweetModel {
 
     @JsonProperty(value = "created_at")
     private String at;
@@ -22,22 +22,23 @@ public class Tweet {
     private String text;
     private String source;
     private boolean truncated;
-    private Object in_reply_to_status_id;
-    private Object in_reply_to_status_id_str;
-    private Object in_reply_to_user_id_str;
-    private Object in_reply_to_screen_name;
-    private User user;
-    private Object geo;
-    private Object coordinates;
-    private Object place;
-    private Object contributors;
-    private Tweet retweeted_status;
+    private String in_reply_to_status_id;
+    private String in_reply_to_status_id_str;
+    private String in_reply_to_user_id;
+    private String in_reply_to_user_id_str;
+    private String in_reply_to_screen_name;
+    private UserModel user;
+    private String geo;
+    private String coordinates;
+    private PlaceModel place;
+    private String contributors;
+    private TweetModel retweeted_status;
     private boolean is_quote_status;
     private long quote_count;
     private long reply_count;
     private long retweet_count;
     private long favorite_count;
-    private Map<Object, Object> entities;
+    private EntitiesModel entities;
     private boolean favorited;
     private boolean retweeted;
     private String filter_level;

@@ -1,0 +1,7 @@
+@namespace("com.vish.tweet.model")
+protocol bounding_box_protocol {
+	record BoundingBox {
+		string? type = null;
+		union { null, array<array<array<long>>> } coordinates = null;
+	}
+}

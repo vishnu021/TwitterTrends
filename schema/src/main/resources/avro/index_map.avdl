@@ -1,0 +1,7 @@
+@namespace("com.vish.tweet.model")
+protocol index_map_protocol {
+	record IndexMap {
+		string? text = null;
+		union { null, array<long> } indices = null;
+	}
+}

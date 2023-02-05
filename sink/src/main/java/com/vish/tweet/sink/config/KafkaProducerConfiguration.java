@@ -1,6 +1,8 @@
 package com.vish.tweet.sink.config;
 
+import com.vish.tweet.model.Tweet;
 import com.vish.tweet.sink.Sink;
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -15,22 +17,24 @@ import java.util.Properties;
 @Configuration
 public class KafkaProducerConfiguration {
     @Bean
-    public Sink createKafkaSink(KafkaProducer<String, String> producer, @Value("${kafka.topic}") String topic) {
+    public Sink createKafkaSink(KafkaProducer<String, Tweet> producer, @Value("${kafka.topic}") String topic) {
         return new Sink(producer, topic);
     }
 
     @Bean
-    public KafkaProducer<String, String> createKafkaProducer(@Value("${kafka.bootstrap.server}") String bootstrapServers) {
-        Properties properties = createKafkaProducerProperties(bootstrapServers);
+    public KafkaProducer<String, Tweet> createKafkaProducer(@Value("${kafka.bootstrap.server}") String bootstrapServers,
+                                                            @Value("${kafka.schema.registry.url}") String schemaRegistryUrl) {
+        Properties properties = createKafkaProducerProperties(bootstrapServers, schemaRegistryUrl);
         log.info("Creating kafka producer with properties : {}", properties);
         return new KafkaProducer<>(properties);
     }
 
-    private Properties createKafkaProducerProperties(String bootstrapServers) {
+    private Properties createKafkaProducerProperties(String bootstrapServers, String schemaRegistryUrl) {
         Properties properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
+        properties.setProperty("schema.registry.url", schemaRegistryUrl);
 
         // Additional Properties
         properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");

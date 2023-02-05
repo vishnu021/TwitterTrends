@@ -1,0 +1,9 @@
+@namespace("com.vish.tweet.model")
+protocol urls_protocol {
+	record Urls {
+		string? url = null;
+		string? expanded_url = null;
+		string? display_url = null;
+		union { null, array<long> } indices = null;
+	}
+}

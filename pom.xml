@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.vish.tweet.reader</groupId>
+    <groupId>com.vish.tweet</groupId>
     <artifactId>TwitterTrends</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TwitterTrends</name>
@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>schema</module>
         <module>sink</module>
         <module>twitter-producer</module>
         <module>reader</module>

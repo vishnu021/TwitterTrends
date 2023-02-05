@@ -1,0 +1,36 @@
+@namespace("com.vish.tweet.model")
+protocol tweet_protocol {
+    import idl "user.avdl";
+    import idl "entities.avdl";
+    import idl "place.avdl";
+    record Tweet {
+        string? created_at = null;
+        long? id = null;
+        string? id_str = null;
+        string? text = null;
+        string? source = null;
+        boolean? truncated = null;
+        string? in_reply_to_status_id = null;
+        string? in_reply_to_status_id_str = null;
+        string? in_reply_to_user_id = null;
+        string? in_reply_to_user_id_str = null;
+        string? in_reply_to_screen_name = null;
+        com.vish.tweet.model.User? user = null;
+        string? geo = null;
+        string? coordinates = null;
+        com.vish.tweet.model.Place? place = null;
+        string? contributors = null;
+        com.vish.tweet.model.Tweet? retweeted_status = null;
+        boolean? is_quote_status = null;
+        long? quote_count = null;
+        long? reply_count = null;
+        long? retweet_count = null;
+        long? favorite_count = null;
+        com.vish.tweet.model.Entities? entities = null;
+        boolean? favorited = null;
+        boolean? retweeted = null;
+        string? filter_level = null;
+        string? lang = null;
+        long? timestampMs = null;
+    }
+}

@@ -1,0 +1,10 @@
+@namespace("com.vish.tweet.model")
+protocol user_mentions_protocol {
+	record UserMentions {
+		string? screen_name = null;
+		string? name = null;
+		long? id = null;
+		string? id_str = null;
+		union { null, array<long> } indices = null;
+	}
+}

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User {
+public class UserModel {
     private long id;
     private String id_str;
     @JsonProperty(value = "name")
@@ -20,19 +20,20 @@ public class User {
     private String description;
     private String translator_type;
     @JsonProperty(value = "protected")
-    private String protected_value;
+    private boolean protected_value;
     @JsonProperty(value = "verified")
     private boolean verified;
+    private String verifiedType;
     private long followers_count;
     private long friends_count;
     private long listed_count;
     private long favourites_count;
     private long statuses_count;
     private String created_at;
-    private Object utc_offset;
-    private Object time_zone;
+    private String utc_offset;
+    private String time_zone;
     private boolean geo_enabled;
-    private Object lang;
+    private String lang;
     private boolean contributors_enabled;
     private boolean is_translator;
     private String profile_background_color;
@@ -49,10 +50,10 @@ public class User {
     private String profile_banner_url;
     private boolean default_profile;
     private boolean default_profile_image;
-    private Object following;
-    private Object follow_request_sent;
-    private Object notifications;
-    private List<Object> withheld_in_countries;
+    private long following;
+    private long follow_request_sent;
+    private long notifications;
+    private List<String> withheld_in_countries;
 
     @Override
     public String toString() {

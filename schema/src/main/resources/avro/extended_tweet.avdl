@@ -1,0 +1,9 @@
+@namespace("com.vish.tweet.model")
+protocol extended_tweet_protocol {
+    import idl "entities.avdl";
+    record ExtendedTweet {
+        string? full_text = null;
+        union { null, array<long> } display_text_range = null;
+        union { null, array<com.vish.tweet.model.Entities> } entities = null;
+    }
+}

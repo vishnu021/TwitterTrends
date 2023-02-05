@@ -1,0 +1,15 @@
+@namespace("com.vish.tweet.model")
+protocol place_protocol {
+	import idl "bounding_box.avdl";
+	record Place {
+		string? id = null;
+		string? url = null;
+		string? place_type = null;
+		string? name = null;
+		string? full_name = null;
+		string? country_code = null;
+		string? country = null;
+		com.vish.tweet.model.BoundingBox? bounding_box = null;
+		union { null, map<string> } attributes = null;
+	}
+}

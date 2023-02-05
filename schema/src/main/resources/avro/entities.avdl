@@ -1,0 +1,12 @@
+@namespace("com.vish.tweet.model")
+protocol entities_protocol {
+    import idl "user_mentions.avdl";
+    import idl "urls.avdl";
+    import idl "index_map.avdl";
+    record Entities {
+        union { null, array<com.vish.tweet.model.IndexMap> } hashtags = null;
+        union { null, array<com.vish.tweet.model.Urls> } urls = null;
+        union { null, array<com.vish.tweet.model.UserMentions> } user_mentions = null;
+        union { null, array<com.vish.tweet.model.IndexMap> } symbols = null;
+    }
+}

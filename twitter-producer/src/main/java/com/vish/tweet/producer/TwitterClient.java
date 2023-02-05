@@ -1,11 +1,7 @@
 package com.vish.tweet.producer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twitter.hbc.core.Client;
 import com.vish.tweet.sink.Sink;
-import com.vish.tweet.sink.model.Tweet;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -28,28 +24,16 @@ public class TwitterClient implements ApplicationRunner {
         addShutDownHook(client);
 
         try {
-            ObjectMapper mapper = getObjectMapper();
             log.info("Looping through tweets");
             while (!client.isDone()) {
                 String msg = msgQueue.poll(5, TimeUnit.SECONDS);
-                Tweet tweet = mapper.readValue(msg, Tweet.class);
-                log.info(tweet.toString());
                 sink.process(msg);
             }
         } catch (InterruptedException e) {
             log.error("Error while reading from twitter", e);
             client.stop();
-        } catch (JsonProcessingException e) {
-            log.error("Error while converting to object", e);
-            throw new RuntimeException(e);
         }
         log.info("End of Application");
-    }
-
-    private ObjectMapper getObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper;
     }
 
     private void addShutDownHook(final Client client) {
